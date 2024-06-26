@@ -1,0 +1,755 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card Flip Animation</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* styles.css */
+
+/* Base styles for the body */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Container to hold the cards */
+.container {
+    display: flex;
+    justify-content: space-around;
+    width: 80%;
+}
+
+/* Card styles */
+.card {
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+    margin: 20px;
+}
+
+.card > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.6s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Front and back styles */
+.front {
+    background-color: #ffffff;
+}
+
+.back {
+    background-color: #ff6347;
+    color: #ffffff;
+    transform: rotateY(180deg);
+}
+
+/* Flip effect */
+.card:hover .front {
+    transform: rotateY(-180deg);
+}
+
+.card:hover .back {
+    transform: rotateY(0deg);
+}
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="front">
+                <h2>Front Side</h2>
+                <p>This is the front of the card.</p>
+            </div>
+            <div class="back">
+                <h2>Back Side</h2>
+                <p>This is the back of the card.</p>
+            </div>
+        </div>
+        <div class="card">
+            <div class="front">
+                <h2>Front Side</h2>
+                <p>This is the front of another card.</p>
+            </div>
+            <div class="back">
+                <h2>Back Side</h2>
+                <p>This is the back of another card.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+    <style>
+        :root {
+            --direction: -45deg;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-image: url("https://img.freepik.com/free-photo/background-gradient-lights_23-2149304998.jpg?t=st=1716393518~exp=1716397118~hmac=3c0f96b9131b6b1e0e01fd285cefadc2608f675472a760795afe49c538dc47e4&w=900");
+            background-size: cover;
+            font-family: Georgia, Times, serif;
+            overflow-x: hidden;
+
+        }
+
+        @keyframes zoom {
+            0% {
+                transform: scale(1);
+                overflow: hidden;
+            }
+
+            50% {
+                transform: scale(1.2);
+                overflow: hidden;
+            }
+
+            100% {
+                transform: scale(1);
+                overflow: hidden;
+            }
+        }
+
+        /* main {
+            position: relative;
+
+        } */
+
+        /* div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-repeat: none;
+} */
+
+        .background {
+            background-image: url("https://img.freepik.com/free-photo/brown-coffee-droplets-fly-around-cup-chaotic-artistic-splash_91128-4339.jpg?t=st=1716384836~exp=1716388436~hmac=e4628bdf75d6e0e4b5c3c9ae9c90451b22d5ea35a30dabccdaa48071533a84c4&w=1380");
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            padding: 75px;
+            background-size: cover;
+            /* background-repeat: none; */
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            background-position: center;
+        }
+
+        .foreground {
+            background-image: url("https://img.freepik.com/premium-photo/cup-coffee-wooden-table-with-fall-mood_877288-560.jpg?w=900");
+            mask-image: linear-gradient(var(--direction), rgba(0, 0, 0, 1) 50%, rgba(0, 0, 0, 0) 60%);
+            mask-position: 50% 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: none;
+            display: flex;
+            padding: 75px;
+            flex-direction: column;
+            align-items: flex-end;
+            justify-content: flex-end;
+
+        }
+
+        .order-button {
+            background-color: transparent;
+            border: 2px solid #ffffcc;
+            outline: none;
+            border-radius: 10px;
+            color: #ffffcc;
+            font-family: "Poppins";
+            font-weight: bold;
+            padding: 10px;
+        }
+
+        .button {
+            text-align: center;
+
+        }
+
+        .body-one-container {
+            margin-top: 650px;
+        }
+
+
+        .coffe-img {
+            width: 100%;
+            animation: zoom 15s linear infinite;
+        }
+
+        .discover-button {
+            background-color: #4d0000;
+            border: 2px solid #4d0000;
+
+            color: #ffffcc;
+            font-family: "Poppins";
+            font-weight: bold;
+            padding: 10px;
+            box-shadow: 2px 2px 2px 2px black;
+            animation: zoom 1s linear infinite;
+            margin: 15px;
+        }
+
+        .cofee-container {
+            background-image: url("https://img.freepik.com/free-photo/freshly-brewed-coffee-dark-wooden-table-inviting-aroma-generated-by-artificial-intelligence_188544-84866.jpg?t=st=1716395635~exp=1716399235~hmac=37654b6cd665b781451013da917481ad6cea38ab77f77b6637fbb8a94df5a87c&w=1060");
+            background-size: cover;
+            height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+            font-style: italic;
+            /* font-family:Georgia,  Times, serif; */
+            /* flex-direction:row;
+            justify-content: center;
+            align-items: center;
+            color: #ffffcc;
+            font-family: "Poppins";
+            font-weight: bold;
+            animation: zoom 15s linear infinite;
+            margin-top: 45px;
+            padding: 20px;
+            font-style: italic; */
+            overflow-x: hidden;
+
+        }
+
+        .cofee-img-1 {
+            width: 100%;
+            border-radius: 25px;
+            padding: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+        }
+
+        .cofee-img-1:hover {
+            animation: zoom 10s linear infinite;
+        }
+
+        .coffe-body-bg-container {
+            background-image: url("https://img.freepik.com/premium-photo/group-coffee-beans-flying-air_81048-18968.jpg?w=1060");
+            height: 80vh;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            animation: zoom 15s linear infinite;
+        }
+
+        .open-timing-container {
+            text-align: center;
+            padding: 25px;
+            font-family: "Poppins";
+            font-weight: bold;
+            margin-top: 35px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        h6 {
+            font-weight: bold;
+        }
+
+        hr {
+            width: 20%;
+            font-weight: bold;
+        }
+
+        .check-img {
+            width: 100%;
+            padding: 20px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+           
+            border-radius: 25px;
+        }
+
+        .icon {
+            margin: 5px;
+        }
+
+        .good-head {
+            animation: zoom 15 linear infinite;
+
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <a class="navbar-brand" href="#">Chitti Pnada's </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="style.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="product.html">Product</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="gallery.html">Gallery</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Menu
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="#">Action</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </li>
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+    </nav>
+    <main>
+        <div class="main-container">
+            <div class="background">
+                <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+                <h1 style="color:white;font-family:Poppins;font-weight:bold;margin-top:15px;">Start Your Day with Fresh
+                    Coffee!</h1>
+                <h5 style="font-family:Poppins;font-weight:normal;color: #ffffcc">Coffe is a popular and beloved
+                    beverage
+                    enjoyed by people around the world!.</h5>
+
+                <button class="order-button  ">Order Now!</button>
+            </div>
+            <div class="foreground">
+                <h1 style="color:white;font-family:Poppins;font-weight:bold;">Start Your Day with Fresh
+                    Coffee!</h1>
+                <h5 style="font-family:Poppins;font-weight:normal;color: #ffffcc">Coffe is a popular and beloved
+                    beverage
+                    enjoyed by people around the world!.</h5>
+                <button class="order-button mb-5 ">Order Now!</button>
+                <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+
+            </div>
+
+        </div>
+    </main>
+    <!-----========BODY CONTAINER-1=========-------->
+
+    <div class="body-one-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-6 col-sm-12">
+                    <img src="https://res.cloudinary.com/dbfit07cn/image/upload/v1716391991/8970975-removebg-preview_xqt0kp.png"
+                        class="coffe-img" />
+
+                </div>
+                <div class="col-12 col-lg-6 col-sm-12 ">
+
+                    <h1 style="color:#4d0000;font-weight:bold;font-family: Lora;padding:25px;margin-top:30px;"><span
+                            style="font-style:italic;font-weight:bold;">Beyond a Cup :</span> Experience the World of
+                        Specialty Coffee</h1>
+                    <p style=" color:#660000;padding:20px;font-family: Lora; ">Don't just wake up, awaken your
+                        senses."
+                        Indulge in the world of premium coffee with us. Explore a variety of freshly roasted beans, each
+                        bursting with unique flavor profiles. We deliver the perfect cup right to your doorstep, so you
+                        can savor the rich aroma and invigorating taste that starts your day off right. Visit our
+                        website now and discover your new coffee obsession!</p>
+                    <div style="padding-left:25px; color:#660000;">
+                        <button class="discover-button ">Discover More!</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <!-----========BODY CONTAINER-2=========-------->
+        <div class="cofee-container mt-5">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-12 mb-5">
+                        <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+
+
+                    </div>
+
+
+                    <div class="col-12">
+                        <h1 class="good-head ">Good cofee will find the Audience</h1>
+
+
+
+                    </div>
+                    
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-----========TOP CATEGEORIES=========-------->
+        <h1 style="color:#4d0000;font-weight:bold;font-family:Poppins;padding:25px;margin-top:30px;text-align:center;">
+            Top Categeories</h1>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 slide-in-left">
+                    <img src="https://img.freepik.com/free-photo/coffee-splashes-white-cup-black-background_8353-1511.jpg?t=st=1716396887~exp=1716400487~hmac=65a2f18229ff8a1e9d1b54c08c841cff968f40ad14b0268f68c8490a7bce73f9&w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Black
+                        Cofee</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Simply brewed coffee without any added milk or sugar. This is the purest way to experience the
+                        flavor of the beans.</p>
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 slide-in-left">
+                    <img src="https://img.freepik.com/free-photo/view-3d-coffee-cup-with-roasted-beans_23-2151083808.jpg?t=st=1716395859~exp=1716399459~hmac=194ca733b3bdae6c9fe19dfdb949dacb32bcdba5c803083f3a5b6346a6402943&w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">
+                        Espresso</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Strong coffee brewed by forcing hot water through finely-ground beans. It's the base for many
+                        other coffee drinks..</p>
+
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12 ">
+                    <img src="https://img.freepik.com/free-photo/coffee-splashes-white-cup-black-background_8353-1511.jpg?t=st=1716396887~exp=1716400487~hmac=65a2f18229ff8a1e9d1b54c08c841cff968f40ad14b0268f68c8490a7bce73f9&w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">
+                        Cappuccino</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Espresso with equal parts steamed milk and milk foam, creating a thicker and frothier
+                        consistency than a latte..</p>
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/premium-photo/stock-photo-back-school_896782-14596.jpg?w=900"
+                        class="cofee-img-1 shadow" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Latte
+                    </h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Espresso with steamed milk and a thin layer of milk foam..</p>
+
+
+
+                </div>
+
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/premium-photo/lobster-bisque-soup-with-cream-brandy_1234738-16621.jpg?w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Mocha
+                    </h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">A
+                        latte with chocolate flavoring, usually syrup or cocoa powder...</p>
+
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/free-photo/close-up-cup-coffee-with-wooden-background_23-2148251640.jpg?t=st=1716397629~exp=1716401229~hmac=6cf8b94f1180b51639d5f28560b562cc446ce227ea7d72fd26c7061771950e2b&w=900"
+                        class="cofee-img-1 shadow" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">
+                        Americano</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Espresso diluted with hot water to create a weaker but still bold coffee drink...</p>
+
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/free-photo/delicious-quality-coffee-cup_23-2150691387.jpg?t=st=1716398929~exp=1716402529~hmac=4edb78dcfbb4e51288aa0377c451a9a9334608a91a224786270cd8c5f36547d3&w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">
+                        Macchiato</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Espresso with a dollop of milk foam on top..</p>
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/free-photo/cup-latte-coffee-with-frothy-foam-wooden-background_23-2148209223.jpg?t=st=1716398988~exp=1716402588~hmac=68292dac3bfad13eca9822a7851c15f2779ba63de9431759f8a94b5a9d8552d4&w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Flat
+                        White</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Similar to a latte but with a smoother, microfoam texture and stronger coffee flavor...</p>
+
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/free-photo/delicious-iced-coffee-tray-arrangement_23-2149600735.jpg?t=st=1716399076~exp=1716402676~hmac=7e246cf1a2360f6d735b5e26936c8d8b5a454791f873b37a0fe6758ae3a76a9c&w=900"
+                        class="cofee-img-1 shadow" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Cold
+                        Brew</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Coffee brewed with cold water over an extended period, resulting in a less acidic and smoother
+                        concentrate that can be served hot or cold...</p>
+
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/premium-photo/ice-coffee-tall-glass-with-cream-cold-summer-drink-wooden-table-generative-ai-illustration_36615-1021.jpg?w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Iced
+                        Coffee</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Coffee brewed hot or cold, then chilled and served with ice. It can be sweetened or flavored...
+                    </p>
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/premium-photo/closeup-shot-roasted-coffee-beans-background_1015293-15627.jpg?w=900"
+                        class="cofee-img-1" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">Decaf
+                        Coffee</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Coffee that has had most of its caffeine removed...</p>
+
+
+
+                </div>
+                <div class="col-12 col-lg-4 col-md-6 col-sm-12">
+                    <img src="https://img.freepik.com/free-photo/cup-milk-with-cocoa-coffee-powders_114579-16762.jpg?t=st=1716399381~exp=1716402981~hmac=5d914071f52ea823d165189f71a7164aada73130d8473e5cf6920f525464311d&w=900"
+                        class="cofee-img-1 shadow" />
+                    <h3 style="font-weight:bold;text-align:center;font-family:Poppins;padding:25px;color:#331a00;">
+                        Instant Coffee</h3>
+                    <p style="font-weight:normal;text-align:center;font-family:Poppins;padding:8px;color:#331a00;">
+                        Pre-brewed coffee that dissolves quickly in hot water...</p>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-----========BODY CONTAINER-2=========-------->
+        <div class="container ">
+            <div class="row">
+                <div class="col-12">
+                    <div class="coffe-body-bg-container ">
+                        
+                        <h1 class="d-flex flex-row justify-content-center;"
+                            style="color:white;font-family:Poppins;font-weight:bold;text-align:center;padding:20px;">
+                            Sunrise in every mug. Freshly roasted beans,
+                            bursting with flavor, delivered straight to your door.
+
+
+                        </h1>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-----========BODY CONTAINER-3=========-------->
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <div class="open-timing-container ">
+                        <h1 style="color:#331a00;font-weight:bold;">Don't wait Hurry up to Order Coffee</h1>
+                        <h3>Our Timings</h3>
+                        <hr />
+                        <ul>
+                            <h6>Weekdays (Monday to Friday):</h6>
+                            <li>Morning: 6:00 AM - 7:00 AM opening time</li>
+                            <li>Evening: 8:00 PM - 10:00 PM closing time</li>
+                        </ul>
+                        <ul>
+                            <h6>Weekends (Saturday and Sunday):</h6>
+                            <li>Morning: 7:00 AM - 8:00 AM opening time</li>
+                            <li>Evening: 8:00 PM - 10:00 PM closing time</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-----========FRESH ORGANIC SERVICES=========-------->
+        <h5 style="color:#660000;font-weight:bold;text-align:center;">Our Services</h5>
+
+        <h1 style="color:#331a00;font-weight:bold;text-align:center;" class="mb-5">Fresh & Organic Beans</h1>
+        <hr />
+
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <img src="https://img.freepik.com/premium-photo/before-competing-championship-level-coffee-brewing-competition-young-baristas-practice_159755-11180.jpg?w=900"
+                        class="check-img" />
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#660000"
+                            class="bi bi-truck icon" viewBox="0 0 16 16">
+                            <path
+                                d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2" />
+                        </svg>
+                        <h6 style="color:black;font-weight:bold; padding:10px;">Fastest Door Delivery</h6>
+                    </div>
+                    <p style="color:black;font-weight:normal; padding:10px;">Experience unmatched convenience with our
+                        ultra-fast delivery! At Chitti panda, we prioritize your time by delivering orders with
+                        exceptional speed.</p>
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <img src="https://img.freepik.com/free-photo/pile-coffee-beans_144627-21961.jpg?t=st=1716739075~exp=1716742675~hmac=bc9b747e42e011a99d1e397ce27b573b8b5b0ccce7b98793cc1f56a068ad73e8&w=900"
+                        class="check-img" />
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <div class="d-flex">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#660000"
+                            class="bi bi-cup-hot-fill icon" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd"
+                                d="M.5 6a.5.5 0 0 0-.488.608l1.652 7.434A2.5 2.5 0 0 0 4.104 16h5.792a2.5 2.5 0 0 0 2.44-1.958l.131-.59a3 3 0 0 0 1.3-5.854l.221-.99A.5.5 0 0 0 13.5 6zM13 12.5a2 2 0 0 1-.316-.025l.867-3.898A2.001 2.001 0 0 1 13 12.5" />
+                            <path
+                                d="m4.4.8-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 3.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 3.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 3 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 4.4.8m3 0-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.253.382l-.018.025-.005.008-.002.002A.5.5 0 0 1 6.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 6.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 6 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 7.4.8m3 0-.003.004-.014.019a4 4 0 0 0-.204.31 2 2 0 0 0-.141.267c-.026.06-.034.092-.037.103v.004a.6.6 0 0 0 .091.248c.075.133.178.272.308.445l.01.012c.118.158.26.347.37.543.112.2.22.455.22.745 0 .188-.065.368-.119.494a3 3 0 0 1-.202.388 5 5 0 0 1-.252.382l-.019.025-.005.008-.002.002A.5.5 0 0 1 9.6 4.2l.003-.004.014-.019a4 4 0 0 0 .204-.31 2 2 0 0 0 .141-.267c.026-.06.034-.092.037-.103a.6.6 0 0 0-.09-.252A4 4 0 0 0 9.6 2.8l-.01-.012a5 5 0 0 1-.37-.543A1.53 1.53 0 0 1 9 1.5c0-.188.065-.368.119-.494.059-.138.134-.274.202-.388a6 6 0 0 1 .253-.382l.025-.035A.5.5 0 0 1 10.4.8" />
+                        </svg>
+
+                        <h6 style="color:black;font-weight:bold; padding:10px;">Fresh Coffee Beans</h6>
+                    </div>
+                    <p style="color:black;font-weight:normal; padding:10px;">Experience unmatched convenience with our
+                        ultra-fast delivery! At Chitti panda, we prioritize your time by delivering orders with
+                        exceptional speed.</p>
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <img src="https://img.freepik.com/free-photo/view-3d-coffee-cup-with-roasted-beans_23-2151083808.jpg?t=st=1716739298~exp=1716742898~hmac=c0067e37de148f32b2b150b069a78472719ab747d8e50150debf9c218ecf9a25&w=900"
+                        class="check-img" />
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <div class="d-flex">
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#660000"
+                            class="bi bi-patch-check-fill icon" viewBox="0 0 16 16">
+                            <path
+                                d="M10.067.87a2.89 2.89 0 0 0-4.134 0l-.622.638-.89-.011a2.89 2.89 0 0 0-2.924 2.924l.01.89-.636.622a2.89 2.89 0 0 0 0 4.134l.637.622-.011.89a2.89 2.89 0 0 0 2.924 2.924l.89-.01.622.636a2.89 2.89 0 0 0 4.134 0l.622-.637.89.011a2.89 2.89 0 0 0 2.924-2.924l-.01-.89.636-.622a2.89 2.89 0 0 0 0-4.134l-.637-.622.011-.89a2.89 2.89 0 0 0-2.924-2.924l-.89.01zm.287 5.984-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708.708" />
+                        </svg>
+                        <h6 style="color:black;font-weight:bold; padding:10px;">Best Quality Coffee</h6>
+                    </div>
+                    <p style="color:black;font-weight:normal; padding:10px;">Experience unmatched convenience with our
+                        ultra-fast delivery! At Chitti panda, we prioritize your time by delivering orders with
+                        exceptional speed.</p>
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <img src="https://img.freepik.com/free-photo/vintage-teacups-second-hand-market_23-2149338474.jpg?t=st=1716739657~exp=1716743257~hmac=650623fdd3e16b295188d80a9c0f9ddbdcede6e24a3591e399cfacd5a16d7442&w=900"
+                        class="check-img" />
+                    <hr />
+                </div>
+                <div class="col-12 col-lg-3 col-md-6 col-sm-12 mt-3">
+                    <div class="d-flex">
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="25" fill="#660000"
+                            class="bi bi-usb-mini-fill icon" viewBox="0 0 16 16">
+                            <path
+                                d="M3 3a1 1 0 0 0-1 1v1.293L.293 7A1 1 0 0 0 0 7.707V12a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V7.707A1 1 0 0 0 15.707 7L14 5.293V4a1 1 0 0 0-1-1zm.5 5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5" />
+                        </svg>
+                        <h6 style="color:black;font-weight:bold; padding:10px;">Online Table Booking</h6>
+                    </div>
+                    <p style="color:black;font-weight:normal; padding:10px;">Experience unmatched convenience with our
+                        ultra-fast delivery! At Chitti panda, we prioritize your time by delivering orders with
+                        exceptional speed.</p>
+                    <hr />
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        let c = 45;
+
+        function draw() {
+            document.documentElement.style.setProperty('--direction', c++ + 'deg');
+            requestAnimationFrame(draw);
+        }
+
+        requestAnimationFrame(draw);
+
+
+
+    </script>
+
+</body>
+
+</html>
