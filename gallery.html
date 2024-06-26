@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+    crossorigin="anonymous"></script>
+
+  <style>
+    body {
+      background-image: url("https://img.freepik.com/free-photo/abstract-smooth-brown-wall-background-layout-design-studio-room-web-template-business-report-with-smooth-circle-gradient-color_1258-55872.jpg?t=st=1716663736~exp=1716667336~hmac=3afdcf8ac98e405864b64e5ea77551b9ab01f329c307c83120364c79a1289413&w=826");
+      background-size: cover;
+      font-family: "Lora";
+    }
+
+    .background-container {
+      position: relative;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-position: center;
+      transition: background-image 1s ease-in-out;
+      display: flex;
+
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .advertisement {
+      text-align: center;
+
+
+
+    }
+
+    .quotes {
+
+      height: 100px;
+      margin-top: 10px;
+      color: white;
+
+    }
+
+    .quote {
+      position: relative;
+      margin-top: -50px;
+
+      opacity: 0;
+      transition: opacity 1s;
+    }
+
+    .quote.active {
+      opacity: 1;
+    }
+
+    /* body {
+  align-items:center;
+  background-color:#ccc;
+  background-image:radial-gradient(#fff, #ccc);
+  display:flex;
+  font-family:sans-serif;
+  height:100vh;
+  justify-content:center;
+  margin:0;
+} */
+
+
+    .container-van {
+
+      /* display:flex;
+  flex-wrap:wrap;
+  width:64vmin; */
+      .box {
+        /* align-items:center; */
+        background-color: #fff;
+
+        /* box-sizing:border-box; */
+        /* display:flex; */
+        /* font-size:4vmin; */
+        /* height:30vmin; */
+        /* justify-content:center; */
+        /* margin:1vmin;
+    padding:3vmin;
+    width:30vmin; */
+        &:nth-child(1) {
+          background-color: #f69;
+        }
+
+        &:nth-child(2) {
+          background-color: #ee0;
+        }
+
+        &:nth-child(3) {
+          background-color: #6c3;
+        }
+
+        &:nth-child(4) {
+          background-color: #6cf;
+        }
+      }
+    }
+
+    /* fill styles */
+
+    .fill-layer {
+      animation: fill 1s ease-in-out;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    @keyframes fill {
+      0% {
+        border-radius: 50%;
+        transform: translateY(150%) translateX(150%) scale(2);
+      }
+
+      100% {
+        border-radius: 50%;
+        transform: scale(2);
+      }
+    }
+
+    .containerss {
+
+      /* display:flex;
+  flex-wrap:wrap;
+  width:64vmin; */
+      .box {
+        /* align-items:center; */
+        background-color: #fff;
+
+        /* box-sizing:border-box; */
+        /* display:flex; */
+        /* font-size:4vmin; */
+        /* height:30vmin; */
+        /* justify-content:center; */
+        /* margin:1vmin;
+    padding:3vmin;
+    width:30vmin; */
+        &:nth-child(1) {
+          background: rgba(130, 128, 128, 0.2);
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(5px);
+          -webkit-backdrop-filter: blur(5px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        &:nth-child(2) {
+          background-color: #ee0;
+        }
+
+        &:nth-child(3) {
+          background-color: #6c3;
+        }
+
+        &:nth-child(4) {
+          background-color: #6cf;
+        }
+      }
+    }
+
+    /* fill styles */
+
+    .fill-layer {
+      animation: fill 1s ease-in-out;
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    @keyframes fill {
+      0% {
+        border-radius: 50%;
+        transform: translateY(150%) translateX(150%) scale(2);
+      }
+
+      100% {
+        border-radius: 50%;
+        transform: scale(2);
+      }
+    }
+
+    .containersss {
+
+      /* display:flex;
+  flex-wrap:wrap;
+  width:64vmin; */
+      .box {
+        /* align-items:center; */
+        background-color: #fff;
+
+        /* box-sizing:border-box; */
+        /* display:flex; */
+        /* font-size:4vmin; */
+        /* height:30vmin; */
+        /* justify-content:center; */
+        /* margin:1vmin;
+    padding:3vmin;
+    width:30vmin; */
+        &:nth-child(1) {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 16px;
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(5px);
+          -webkit-backdrop-filter: blur(5px);
+          border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        &:nth-child(2) {
+          background-color: #ee0;
+        }
+
+        &:nth-child(3) {
+          background-color: #6c3;
+        }
+
+        &:nth-child(4) {
+          background-color: #6cf;
+        }
+      }
+    }
+
+    /* fill styles */
+
+    .fill-layer {
+      /* animation:fill 1s ease-in-out;   */
+      bottom: 0;
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: -1;
+    }
+
+    @keyframes fill {
+      0% {
+        border-radius: 50%;
+        transform: translateY(150%) translateX(150%) scale(2);
+      }
+
+      100% {
+        border-radius: 50%;
+        transform: scale(2);
+      }
+    }
+
+    .gallery-image-1 {
+      width: 100%;
+      padding: 25px;
+      border-radius: 45px;
+
+
+    }
+
+    hr {
+      background-color: #FFFF99;
+      width: 30%;
+
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">Chitti Pnada's </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="style.html">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.html">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Product</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="gallery.html">Gallery</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Menu
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <!----automatci background changing images---->
+  <div class="background-container">
+    <section class="advertisement">
+
+      <div class="quotes">
+        <div class="quote active">
+          <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+
+          <h1>Best coffee in town!"</h1>
+        </div>
+        <div class="quote">
+          <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+
+          <h1>A perfect place to relax and enjoy.</h1>
+        </div>
+        <div class="quote">
+          <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+
+          <h1>Amazing ambiance and great service.</h1>
+        </div>
+        <div class="quote">
+          <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png" />
+
+          <h1>Coffee, the favorite drink of the civilized world.</h1>
+        </div>
+
+        <!-- Add more quotes as needed -->
+      </div>
+    </section>
+
+  </div>
+  <!--------body-text-section------------>
+  <hr />
+  <h3 style="padding:20px;color:#FFFF99;font-weight:bold; text-align:center;">Life happens, coffee helps.</h3>
+
+  <p style="color:#FFFF99;font-weight:normal; text-align:center;padding:15px;">
+    Nestled in the heart of the city, our café is a haven for food and coffee enthusiasts alike. The moment you step
+    inside, you're greeted by the rich aroma of freshly brewed coffee, sourced from the finest beans around the world.
+    Our baristas are artisans, crafting each cup with precision and passion to bring out the unique flavors and aromas
+    that make every sip a delight. <br />
+
+    The menu is a celebration of culinary creativity, offering an eclectic mix of dishes that cater to every palate.
+    From hearty breakfasts that kickstart your day, to light, refreshing salads, and indulgent desserts that provide the
+    perfect sweet ending, each dish is made with fresh, locally-sourced ingredients. Our chefs blend tradition and
+    innovation, ensuring every bite is a memorable experience.
+  </p>
+  <hr />
+  <!-------card fill animation background------------>
+  <div class="container mt-5 mb-5">
+    <div class="row">
+      <div class="col-12 col-lg-4 col-md-12 col-sm-12 mb-5">
+        <div class="containerss">
+          <div class="box fill">
+            <h4 style="padding:20px;color:#FFFF99;font-weight:bold;text-align:center;">A Fusion of Flavor and Art</h4>
+
+            <img
+              src="https://img.freepik.com/premium-photo/international-coffee-day-creative-editorial-photography_950002-102725.jpg?w=1060"
+              class="gallery-image-1" />
+            <p style="padding:10px; color:#FFFF99;
+                   ">At the heart of our gallery is our passion for exceptional coffee. Each cup is a testament to our
+              dedication, made from the finest beans sourced globally and roasted to perfection. Whether you prefer a
+              bold espresso, a creamy latte, or a refreshing iced coffee, our skilled baristas craft each beverage with
+              care and precision.
+
+
+            </p>
+
+          </div>
+
+        </div>
+        <hr />
+
+      </div>
+
+      <div class="col-12 col-lg-4 col-md-12 col-sm-12 mb-5">
+        <div class="containerss">
+          <div class="box fill">
+            <h4 style="padding:20px;color:#FFFF99;font-weight:bold;text-align:center;">The Coffee Experience</h4>
+            <img
+              src="https://img.freepik.com/premium-photo/international-coffee-day-creative-editorial-photography_950002-102725.jpg?w=1060"
+              class="gallery-image-1" />
+            <p style="padding:10px; color:#FFFF99;
+                       ">Step into our Coffee Gallery, where the aroma of freshly brewed coffee mingles with the
+              vibrant energy of artistic expression. Our café is more than just a place to enjoy a meal—it's an
+              experience that delights all your senses.
+              Our gallery is driven by a passion for exceptional coffee. Each cup, made from the finest
+            </p>
+
+          </div>
+
+        </div>
+        <hr />
+
+      </div>
+
+      <div class="col-12 col-lg-4 col-md-12 col-sm-12 mb-5">
+        <div class="containerss">
+          <div class="box fill">
+            <h4 style="padding:20px;color:#FFFF99;font-weight:bold;text-align:center;">Unveil the Artistry of Coffee
+            </h4>
+            <img
+              src="https://img.freepik.com/premium-photo/international-coffee-day-creative-editorial-photography_950002-102725.jpg?w=1060"
+              class="gallery-image-1" />
+            <p style="padding:10px; color:#FFFF99;
+                     ">Step into a realm where coffee becomes a canvas and each sip tells a story of craftsmanship and
+              passion. Our café is more than just a place to enjoy a beverage—it's a sanctuary for coffee enthusiasts
+              seeking an elevated experience.
+
+              In our pursuit of perfection, we source only the finest beans from across the globe.</p>
+
+          </div>
+
+        </div>
+        <hr />
+        <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/frill-free-img.png"/>
+        <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/fork-free-img.png"/>
+        <img src="https://luckyeyeclinic.com/wp-content/uploads/2018/09/knife-free-imge.png" />
+
+      </div>
+      <hr />
+
+    </div>
+
+  </div>
+
+
+
+  <script>
+    const elements = Array.from(document.querySelectorAll('.fill'));
+
+    function fill(item, index) {
+
+      const bgColor = getComputedStyle(item).backgroundColor,
+        fillLayer = document.createElement('div');
+      fillLayer.classList.add('fill-layer');
+      item.style.backgroundColor = 'transparent';
+      item.style.position = 'relative';
+      item.style.overflow = 'hidden';
+      setTimeout(function () {
+        fillLayer.style.backgroundColor = bgColor;
+        item.appendChild(fillLayer);
+      }, index * 1000);
+
+    }
+
+    elements.forEach(fill);
+
+    const images = [
+      'url("https://img.freepik.com/premium-photo/cup-coffee-with-cinnamon-sticks-plate-cinnamon-sticks-table_877288-78.jpg?w=1060")',
+      'url("https://img.freepik.com/premium-photo/glass-cup-traditional-indian-masala-chai-tea-with-milk-spices-gray-background-banner-menu-recipe-place-text_114941-4850.jpg?w=996")',
+      'url("https://img.freepik.com/free-photo/view-3d-coffee-cup_23-2151083682.jpg?t=st=1716659493~exp=1716663093~hmac=b18907f8bf83fcd44991661e72ebb5d87ae14d373e41fabbcb41ba1a807ef2a8&w=900")',
+      'url("https://img.freepik.com/premium-photo/coffee-cup-beans-background_343732-1546.jpg?w=900")' // Add more image URLs as needed
+    ];
+
+    let currentIndex = 0;
+
+    function changeBackground() {
+      const container = document.querySelector('.background-container');
+      container.style.backgroundImage = images[currentIndex];
+      currentIndex = (currentIndex + 1) % images.length;
+    }
+
+    setInterval(changeBackground, 2000); // Change image every 5 seconds
+
+    // Initial background image setup
+    changeBackground();
+
+    document.addEventListener('DOMContentLoaded', function () {
+      let quotes = document.querySelectorAll('.quote');
+      let currentIndex = 0;
+
+      function showNextQuote() {
+        quotes[currentIndex].classList.remove('active');
+        currentIndex = (currentIndex + 1) % quotes.length;
+        quotes[currentIndex].classList.add('active');
+      }
+
+      setInterval(showNextQuote, 2000); // Change quote every 5 seconds
+
+      // Show the first quote initially
+      quotes[currentIndex].classList.add('active');
+    });
+
+
+  </script>
+</body>
+
+</html>
